@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "489669595873",
+    "project_id": "cipherschool-2ae11",
+    "storage_bucket": "cipherschool-2ae11.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489669595873:android:92d95eb1a2365978091da0",
+        "android_client_info": {
+          "package_name": "com.cipherscholl.assignment.expense_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489669595873-5avjslg7ll06d1ovi7nbubaup6le0q4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfc8i4vDtPPOxBz7s93G6-0PSBNoojDEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489669595873-5avjslg7ll06d1ovi7nbubaup6le0q4d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "489669595873-uqso287i946811l3lef9rouou2vdov1l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cipherschool.assignment.expenseTracker"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489669595873:android:ba5f7b6451efb188091da0",
+        "android_client_info": {
+          "package_name": "com.cipherschool.assignment.expense_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489669595873-5avjslg7ll06d1ovi7nbubaup6le0q4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfc8i4vDtPPOxBz7s93G6-0PSBNoojDEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489669595873-5avjslg7ll06d1ovi7nbubaup6le0q4d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "489669595873-uqso287i946811l3lef9rouou2vdov1l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cipherschool.assignment.expenseTracker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

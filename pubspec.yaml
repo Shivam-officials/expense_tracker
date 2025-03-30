@@ -71,6 +71,7 @@ flutter:
     - assets/splash/lower_circle.png
     - assets/splash/upper_circle.png
     - assets/icons/Ellipse_17.svg 
+    - assets/icons/google.svg
 
   #   - images/a_dot_ham.jpeg
 
@@ -106,6 +107,10 @@ flutter:
           weight: 400 
         - asset: assets/fonts/ABeeZee/ABeeZee-Italic.ttf
           style: italic 
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/Inter_18pt_Medium.ttf
+          weight: 500
     
   #   - family: Schyler
   #     fonts:
