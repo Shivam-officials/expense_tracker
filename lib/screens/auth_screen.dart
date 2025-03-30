@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 
-class AuthScreen extends StatefulWidget {
-  const AuthScreen({ super.key });
+class AuthScreen extends StatelessWidget {
+  const AuthScreen({super.key});
 
-  @override
-  State<AuthScreen> createState() => _AuthScreenState();
-}
-
-class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Auth Screen'),
-      ),
-      body: const Center(
-        child: Text('Auth Screen'),
+      backgroundColor: const Color(0xff7B61FF),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Auth Screen',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Add your authentication logic here
+              },
+              child: const Text('Login'),
+            ),
+          ],
+        ),
       ),
     );
   }

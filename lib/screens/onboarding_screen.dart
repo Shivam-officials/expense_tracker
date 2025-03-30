@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:expense_tracker/screens/auth_screen.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
+
+  Future<void> _markUserAsNotFirstTime() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isFirstTimeUser', false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +89,17 @@ class OnBoardingScreen extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await _markUserAsNotFirstTime();
+                          if (context.mounted) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AuthScreen(),
+                              ),
+                            );
+                          }
+                        },
                         icon: SvgPicture.asset(
                           'assets/icons/Ellipse_17.svg',
                           width: 60,
