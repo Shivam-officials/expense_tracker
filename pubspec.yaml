@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.9
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,6 +63,7 @@ flutter:
     - assets/splash/app_image.png
     - assets/splash/lower_circle.png
     - assets/splash/upper_circle.png
+    - assets/icons/Ellipse_17.svg 
 
   #   - images/a_dot_ham.jpeg
 
@@ -91,6 +93,13 @@ flutter:
       fonts:
         - asset: assets/fonts/Bruno_Ace_SC/BrunoAceSC-Regular.ttf
           weight: 400
+    - family: AbeeZee
+      fonts:
+        - asset: assets/fonts/ABeeZee/ABeeZee-Regular.ttf
+          weight: 400 
+        - asset: assets/fonts/ABeeZee/ABeeZee-Italic.ttf
+          style: italic 
+    
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

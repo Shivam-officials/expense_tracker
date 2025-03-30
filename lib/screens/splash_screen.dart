@@ -15,8 +15,8 @@ class SplashScreen extends StatelessWidget {
             right: 0,
             child: Image.asset(
               'assets/splash/upper_circle.png',
-              width: 250,
-              height: 250,
+              width: 300,
+              height: 300,
             ),
           ),
           // Lower Circle (Bottom Left)
@@ -25,8 +25,8 @@ class SplashScreen extends StatelessWidget {
             left: 0,
             child: Image.asset(
               'assets/splash/lower_circle.png',
-              width: 250,
-              height: 250,
+              width: 300,
+              height: 300,
             ),
           ),
           // for open source and community text
