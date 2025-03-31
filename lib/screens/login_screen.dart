@@ -1,74 +1,54 @@
-import 'package:expense_tracker/screens/home_screen.dart';
 import 'package:expense_tracker/services/auth_service.dart';
 import 'package:expense_tracker/utils/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:expense_tracker/custom_widgets/custom_textfield.dart';
-import 'package:expense_tracker/screens/login_screen.dart';
+import 'package:expense_tracker/screens/auth_screen.dart';
 
-class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<AuthScreen> createState() => _AuthScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   bool _obscurePassword = true;
-  bool _termsAccepted = false;
   bool _isLoading = false;
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
-  Future<void> _handleSignUp() async {
+  Future<void> _handleLogin() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    if (!_termsAccepted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please accept the terms and conditions')),
-      );
-      return;
-    }
-
-    // TODO: Implement Firebase sign up
+    // TODO: Implement Firebase login
+    try{
+      final user = await AuthService.signInWithEmailAndPassword(_emailController.text.trim(), _passwordController.text.trim());
+      if(AuthService.getUser != null){
+        showMsg(context, "Login successful");
+      }else{
+        showMsg(context, "Login failed. Please try again.");
+      }
+    }catch(e){
+      showMsg(context, e.toString() + " in login_screen.dart");
+    } 
+    
     setState(() {
       _isLoading = true;
     });
 
     // Simulate API call
-    // await Future.delayed(const Duration(seconds: 2));
-    try {
-      await AuthService.signUpWithEmailAndPassword(
-        _emailController.text.trim(),
-        _passwordController.text.trim(),
-        _nameController.text.trim(),
-      );
-      final user = AuthService.getUser;
-      print("user: $user in auth_screen.dart");
-      if (user != null) {
-        showMsg(context, "user created successfully");
-      } else {
-        showMsg(context, "Sign-up failed. Please try again.");
-      }
-    } catch (e) {
-      showMsg(context, e.toString() + " in auth_screen.dart");
-      setState(() {
-        _isLoading = false;
-      });
-      print(e);
-    }
+    await Future.delayed(const Duration(seconds: 2));
 
     setState(() {
       _isLoading = false;
@@ -85,10 +65,15 @@ class _AuthScreenState extends State<AuthScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           iconSize: 32,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const AuthScreen()),
+            );
+          },
         ),
         title: const Text(
-          'Sign Up',
+          'Login',
           style: TextStyle(
             color: Colors.black,
             fontSize: 20,
@@ -105,17 +90,6 @@ class _AuthScreenState extends State<AuthScreen> {
           child: Column(
             children: [
               const SizedBox(height: 45),
-              CustomTextField(
-                controller: _nameController,
-                hintText: 'Name',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
               CustomTextField(
                 controller: _emailController,
                 hintText: 'Email',
@@ -151,50 +125,12 @@ class _AuthScreenState extends State<AuthScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Checkbox(
-                    value: _termsAccepted,
-                    onChanged: (value) {
-                      setState(() {
-                        _termsAccepted = value ?? false;
-                      });
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    activeColor: const Color(0xFF7B61FF),
-                  ),
-                  Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        style: const TextStyle(color: Colors.black),
-                        children: [
-                          const TextSpan(
-                            text: 'By signing up, you agree to the ',
-                          ),
-                          TextSpan(
-                            text: 'Terms of Service',
-                            style: TextStyle(color: Colors.purple[600]),
-                          ),
-                          const TextSpan(text: ' and '),
-                          TextSpan(
-                            text: 'Privacy Policy',
-                            style: TextStyle(color: Colors.purple[600]),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: _isLoading ? null : _handleSignUp,
+                  onPressed: _isLoading ? null : _handleLogin,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF7B61FF),
                     shape: RoundedRectangleBorder(
@@ -205,7 +141,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       _isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
                           : const Text(
-                            'Sign Up',
+                            'Login',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -236,7 +172,7 @@ class _AuthScreenState extends State<AuthScreen> {
               const SizedBox(height: 20),
               OutlinedButton(
                 onPressed: () {
-                  // TODO: Implement Firebase Google sign up
+                  // TODO: Implement Firebase Google sign in
                 },
                 style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -257,7 +193,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       const SizedBox(width: 12),
                       const Text(
-                        'Sign Up with Google',
+                        'Login with Google',
                         style: TextStyle(
                           color: Colors.black87,
                           fontSize: 18,
@@ -274,7 +210,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Already have an account? ',
+                    'Don\'t have an account? ',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 16,
@@ -287,12 +223,12 @@ class _AuthScreenState extends State<AuthScreen> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
+                          builder: (context) => const AuthScreen(),
                         ),
                       );
                     },
                     child: Text(
-                      'Login',
+                      'Sign Up',
                       style: TextStyle(
                         color: Colors.purple[600],
                         fontWeight: FontWeight.w600,
